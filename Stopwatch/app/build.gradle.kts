@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.hfad.stopwatch"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.hfad.stopwatch"
