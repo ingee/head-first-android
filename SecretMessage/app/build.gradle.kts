@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.hfad.secretmessage"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.hfad.secretmessage"
