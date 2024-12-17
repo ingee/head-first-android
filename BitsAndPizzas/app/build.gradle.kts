@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.hfad.bitsandpizzas"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.hfad.bitsandpizzas"
