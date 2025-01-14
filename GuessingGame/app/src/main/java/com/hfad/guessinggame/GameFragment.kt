@@ -23,26 +23,29 @@ class GameFragment : Fragment() {
         val view = binding.root
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        viewModel.incorrectGuesses.observe(viewLifecycleOwner, Observer {
-            newValue -> binding.incorrectGuesses.text = "Incorrect guesses: $newValue"
+        viewModel.incorrectGuesses.observe(viewLifecycleOwner, Observer { newValue ->
+            binding.incorrectGuesses.text = "Incorrect guesses: $newValue"
         })
 
-        viewModel.livesLeft.observe(viewLifecycleOwner, Observer {
-            newValue -> binding.lives.text = "You have $newValue lives left"
+        viewModel.livesLeft.observe(viewLifecycleOwner, Observer { newValue ->
+            binding.lives.text = "You have $newValue lives left"
         })
 
-        viewModel.secretWordDisplay.observe(viewLifecycleOwner, Observer {
-            newValue -> binding.word.text = newValue
+        viewModel.secretWordDisplay.observe(viewLifecycleOwner, Observer { newValue ->
+            binding.word.text = newValue
+        })
+
+        viewModel.gameOver.observe(viewLifecycleOwner, Observer { newValue ->
+            if (newValue) {
+                val action = GameFragmentDirections
+                    .actionGameFragmentToResultFragment(viewModel.wonLostMessage())
+                view.findNavController().navigate(action)
+            }
         })
 
         binding.guessButton.setOnClickListener {
             viewModel.makeGuess(binding.guess.text.toString().uppercase())
             binding.guess.text = null
-            if (viewModel.isWon() || viewModel.isLost()) {
-                val action = GameFragmentDirections
-                    .actionGameFragmentToResultFragment(viewModel.wonLostMessage())
-                view.findNavController().navigate(action)
-            }
         }
         return view
     }
